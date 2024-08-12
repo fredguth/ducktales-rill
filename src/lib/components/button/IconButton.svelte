@@ -1,0 +1,52 @@
+<script lang="ts">
+  // import Tooltip from "../tooltip/Tooltip.svelte";
+  // import TooltipContent from "../tooltip/TooltipContent.svelte";
+
+  export let disabled = false;
+  export let rounded = false;
+  export let compact = false;
+  export let bgDark = false;
+  export let active = false;
+  // export let disableTooltip = false;
+  export let disableHover = false;
+
+  // export let tooltipDistance = 8;
+  // export let tooltipLocation = "bottom";
+  // export let tooltipAlignment = "center";
+  export let marginClasses = "";
+  export let ariaLabel = "";
+</script>
+
+<!-- <Tooltip
+  distance={tooltipDistance}
+  location={tooltipLocation}
+  alignment={tooltipAlignment}
+> -->
+  <button
+    type="button"
+    on:click
+    aria-label={ariaLabel}
+    class:cursor-auto={disabled}
+    class:rounded
+    class="{marginClasses} grid place-items-center
+{active ? 'bg-gray-200 dark:bg-gray-800' : ''}
+{disabled ? 'text-gray-400' : 'text-gray-800'}
+{disableHover || disabled
+      ? ''
+      : bgDark
+        ? 'hover:bg-gray-600'
+        : 'hover:bg-gray-100'}"
+    style:width="{compact ? 20 : 24}px"
+    style:height="{compact ? 20 : 24}px"
+    style:font-size="18px"
+  >
+    <slot />
+  </button>
+  <!-- <div slot="tooltip-content">
+    {#if $$slots["tooltip-content"] && !disableTooltip}
+      <TooltipContent>
+        <slot name="tooltip-content" />
+      </TooltipContent>
+    {/if}
+  </div>
+</Tooltip> -->

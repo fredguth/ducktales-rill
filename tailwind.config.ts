@@ -13,6 +13,7 @@ const config: Config = {
 				"2xl": "1400px"
 			}
 		},
+		
 		extend: {
 			colors: {
 				border: "hsl(var(--border) / <alpha-value>)",
@@ -22,7 +23,19 @@ const config: Config = {
 				foreground: "hsl(var(--foreground) / <alpha-value>)",
 				primary: {
 					DEFAULT: "hsl(var(--primary) / <alpha-value>)",
-					foreground: "hsl(var(--primary-foreground) / <alpha-value>)"
+					foreground: "hsl(var(--primary-foreground) / <alpha-value>)",
+					
+						50: '#f0f9ff',
+						100: '#e0f2fe',
+						200: '#bae6fd',
+						300: '#7dd3fc',
+						400: '#38bdf8',
+						500: '#0ea5e9',
+						600: '#0284c7',
+						700: '#0369a1',
+						800: '#075985',
+						900: '#0c4a6e',
+					
 				},
 				secondary: {
 					DEFAULT: "hsl(var(--secondary) / <alpha-value>)",
