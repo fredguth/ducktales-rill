@@ -1,11 +1,12 @@
 import type {
   FetchWrapperOptions,
   HTTPError,
-} from "@rilldata/web-common/runtime-client/fetchWrapper";
+} from "./fetchWrapper";
 import { get } from "svelte/store";
 import { RUNTIME_ACCESS_TOKEN_DEFAULT_TTL } from "./constants";
 import { HttpRequestQueue } from "./http-request-queue/HttpRequestQueue";
-import { JWT, runtime } from "./runtime-store";
+import type { JWT } from "./runtime-store";
+import { runtime } from "./runtime-store";
 
 /**
  * Runtime base URL

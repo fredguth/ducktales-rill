@@ -1,21 +1,21 @@
-import { appQueryStatusStore } from "@rilldata/web-common/runtime-client/application-store";
+import { appQueryStatusStore } from "../application-store";
+import type { FetchWrapperOptions } from "../fetchWrapper";
 import {
   fetchWrapper,
-  FetchWrapperOptions,
-} from "@rilldata/web-common/runtime-client/fetchWrapper";
-import type { RequestQueueEntry } from "@rilldata/web-common/runtime-client/http-request-queue/HttpRequestQueueTypes";
+} from "../fetchWrapper";
+import type { RequestQueueEntry } from "../http-request-queue/HttpRequestQueueTypes";
+import type {RequestQueueNameEntry} from "../http-request-queue/HttpRequestQueueTypes";
 import {
   getHeapByName,
   getHeapByQuery,
-  RequestQueueNameEntry,
-} from "@rilldata/web-common/runtime-client/http-request-queue/HttpRequestQueueTypes";
+} from "../http-request-queue/HttpRequestQueueTypes";
 import {
   ActiveColumnPriorityOffset,
   ActivePriority,
   DefaultQueryPriority,
   getPriority,
   InactivePriority,
-} from "@rilldata/web-common/runtime-client/http-request-queue/priorities";
+} from "../http-request-queue/priorities";
 
 // Examples:
 // v1/instances/id/queries/columns-profile/tables/table-name

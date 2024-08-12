@@ -1,11 +1,10 @@
+import type { V1ListResourcesResponse, V1Resource } from "./runtime-client";
 import {
   createRuntimeServiceGetResource,
   createRuntimeServiceListResources,
   getRuntimeServiceListResourcesQueryKey,
   runtimeServiceListResources,
-  V1ListResourcesResponse,
   V1ReconcileStatus,
-  V1Resource,
 } from "./runtime-client";
 import type { QueryClient } from "@tanstack/svelte-query";
 

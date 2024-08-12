@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
     import * as Workspace from "$lib/components/workspace"
     import * as Card from "$lib/components/ui/card";
-    import  Editor  from "$lib/components/editor/Editor.svelte";
+    import  ModelEditor from "$lib/components/editor/ModelEditor.svelte";
 	import { get } from "svelte/store";
     let selectedTable: string;
     let selectedTab: string;
@@ -45,7 +45,7 @@
           on:save={save}
           on:revert={revert}
         /> -->
-        <Editor/>
+        <ModelEditor/>
        
 
       </Workspace.EditorContainer>

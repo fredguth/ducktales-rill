@@ -1,24 +1,89 @@
-<script>
-  import {onMount} from 'svelte';
+<script lang="ts">
+  import { createEventDispatcher, onMount } from "svelte";
   import { EditorView } from "@codemirror/view";
-  let container;
-  let editor;
+  import { EditorState } from "@codemirror/state";
+  import { base } from "./presets/base";
+  import {bindEditorEventsToDispatcher}  from "./dispatch-events";
+
+  export let blob: string;
+  export let latest: string;
+  export let extensions: Extension[] = [];
+
+  let editor: EditorView;
+  let container: HTMLElement;
+  const dispatch = createEventDispatcher();
+
+  function updateEditorContents(newContent: string) {
+      if (editor && !editor.hasFocus) {
+        // NOTE: when changing files, we still want to update the editor
+        let curContent = editor.state.doc.toString();
+        if (newContent != curContent) {
+          editor.dispatch({
+            changes: {
+              from: 0,
+              to: curContent.length,
+              insert: newContent,
+            },
+          });
+        }
+      }
+    }
+
+  function updateEditorExtensions(newExtensions: Extension[]) {
+      editor.setState(
+        EditorState.create({
+          doc: blob,
+          extensions: [
+            // establish a basic editor
+            base(),
+            // any extensions passed as props
+            ...newExtensions,
+            EditorView.updateListener.of((v) => {
+              if (v.focusChanged && v.view.hasFocus) {
+                dispatch("receive-focus");
+              }
+              if (v.docChanged) {
+                latest = v.state.doc.toString();
+              }
+            }),
+          ],
+        }),
+      );
+    }  
   onMount(() => {
-    editor = new EditorView({})
-    })
+      editor = new EditorView({
+        state: EditorState.create({
+          doc: blob,
+          extensions: [
+            base(),
+            bindEditorEventsToDispatcher(dispatch),
+          ]
+        }),
+        parent: container,
+      });
+    });
+
+    $: latest = blob;
+    $: updateEditorContents(latest);
+    $: if (editor) updateEditorExtensions(extensions);
+
+
     </script>
 <section>
 <div class="editor-container">
   <div
   bind:this={container}
   class="size-full"
+  on:click={() => {
+    /** give the editor focus no matter where we click */
+    if (!editor.hasFocus) editor.focus();
+  }}
   on:keydown={() => {
     /** no op for now */
   }}
   role="textbox"
   tabindex="0"
 />
-Editor2
 </div>
 </section>
 <!-- <script lang="ts">

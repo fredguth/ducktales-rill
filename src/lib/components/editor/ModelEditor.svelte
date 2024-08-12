@@ -1,46 +1,4 @@
-<script lang="ts">
-  import {onMount} from 'svelte';
-  let editor: EditorView;
-  let editorContainerComponent: HTMLDivElement;
-  onMount(() => {
-      editor = new EditorView()
-  })
-</script>
-<section>
-  <div class="editor-container">
-    <div
-      bind:this={editorContainerComponent}
-      class="size-full"
-      on:click={() => {
-        /** give the editor focus no matter where we click */
-        if (!editor.hasFocus) editor.focus();
-      }}
-      on:keydown={() => {
-        /** no op for now */
-      }}
-      role="textbox"
-      tabindex="0"
-    />
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <script>
+ <script lang="ts">
   import {
     acceptCompletion,
     autocompletion,
@@ -94,8 +52,6 @@
   import Button from "$lib/components/ui/button/button.svelte";
   import Label from "$lib/components/ui/label/label.svelte";
   import Switch from "$lib/components/ui/switch/switch.svelte";
-  // import Check from "$lib/components/ui/icons/Check.svelte";
-  // import UndoIcon from "$lib/components/ui/icons/UndoIcon.svelte";
   import { queryClient } from "$lib/globalQueryClient";
   import { createEventDispatcher, onMount } from "svelte";
   import { DuckDBSQL } from "./presets/duckDBDialect";
@@ -121,28 +77,28 @@
   $: latest = blob;
 
   // Autocomplete: source tables
-  $: allSourceColumns = useAllSourceColumns(queryClient, $runtime?.instanceId);
-  $: if ($allSourceColumns?.length) {
-    for (const sourceTable of $allSourceColumns) {
-      const sourceIdentifier = sourceTable?.tableName;
-      schema[sourceIdentifier] = sourceTable.profileColumns
-        ?.filter((c) => c.name !== undefined)
-        // CAST SAFETY: already filtered out undefined values
-        .map((c) => c.name as string);
-    }
-  }
+  // $: allSourceColumns = useAllSourceColumns(queryClient, $runtime?.instanceId);
+  // $: if ($allSourceColumns?.length) {
+  //   for (const sourceTable of $allSourceColumns) {
+  //     const sourceIdentifier = sourceTable?.tableName;
+  //     schema[sourceIdentifier] = sourceTable.profileColumns
+  //       ?.filter((c) => c.name !== undefined)
+  //       // CAST SAFETY: already filtered out undefined values
+  //       .map((c) => c.name as string);
+  //   }
+  // }
 
-  //Auto complete: model tables
-  $: allModelColumns = useAllModelColumns(queryClient, $runtime?.instanceId);
-  $: if ($allModelColumns?.length) {
-    for (const modelTable of $allModelColumns) {
-      const modelIdentifier = modelTable?.tableName;
-      schema[modelIdentifier] = modelTable.profileColumns
-        ?.filter((c) => c.name !== undefined)
-        // CAST SAFETY: already filtered out undefined values
-        ?.map((c) => c.name as string);
-    }
-  }
+  // //Auto complete: model tables
+  // $: allModelColumns = useAllModelColumns(queryClient, $runtime?.instanceId);
+  // $: if ($allModelColumns?.length) {
+  //   for (const modelTable of $allModelColumns) {
+  //     const modelIdentifier = modelTable?.tableName;
+  //     schema[modelIdentifier] = modelTable.profileColumns
+  //       ?.filter((c) => c.name !== undefined)
+  //       // CAST SAFETY: already filtered out undefined values
+  //       ?.map((c) => c.name as string);
+  //   }
+  // }
 
   // reactive statements to dynamically update the editor when inputs change
   $: updateEditorContents(latest);
@@ -355,43 +311,14 @@
       tabindex="0"
     />
   </div>
-
-  <footer>
-    <div class="flex gap-x-3">
-      <!-- {#if !autoSave}
-        <Button disabled={!hasUnsavedChanges} on:click={saveContent}>
-          <Check size="14px" />
-          Save
-        </Button>
-
-        <Button
-          type="text"
-          disabled={!hasUnsavedChanges}
-          on:click={revertContent}
-        >
-          <UndoIcon size="14px" />
-          Revert changes
-        </Button>
-      {/if} -->
-    <!-- </div>
-    <div class="flex gap-x-1 items-center h-full bg-white rounded-full">
-      <Switch bind:checked={autoSave} id="auto-save" small />
-      <Label class="font-normal text-xs" for="auto-save">Auto-save</Label>
-    </div>
-  </footer>
 </section>
-
 <style lang="postcss">
   .editor-container {
     @apply size-full overflow-auto p-2 pb-0 flex flex-col;
   }
 
-  footer {
-    @apply justify-between items-center flex flex-none;
-    @apply h-10 p-2 w-full rounded-b-sm border-t bg-white;
-  }
 
   section {
     @apply size-full flex-col rounded-sm bg-white flex overflow-hidden relative;
   }
-</style> --> 
+</style> 
